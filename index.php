@@ -27,7 +27,8 @@ require_once 'config/function_helper.php';
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="<?= url('buku/') ?>" class="nav-link active" aria-current="page">Buku</a></li>
+                <li class="nav-item"><a href="<?= url('chart/') ?>" class="nav-link" aria-current="page">Chart</a></li>
+                <li class="nav-item"><a href="<?= url('buku/') ?>" class="nav-link" aria-current="page">Buku</a></li>
                 <li class="nav-item"><a href="<?= url('pinjam/') ?>" class="nav-link">Pinjam</a></li>
                 <li class="nav-item"><a href="<?= url('anggota/') ?>" class="nav-link">Anggota</a></li>
             </ul>

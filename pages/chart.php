@@ -1,15 +1,20 @@
-<canvas id="myChart" width="400" height="400"></canvas>
+<div class="row">
+    <div class="col-md-4">
+
+        <canvas id="myChart" width="100" height="100"></canvas>
+    </div>
+</div>
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'doughnut',
         data: {
             labels: [
                 'Anggota',
                 'Buku',
             ],
             datasets: [{
-                label: 'My First Dataset',
+                label: 'Perpus',
                 data: [300, 50, 100],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
