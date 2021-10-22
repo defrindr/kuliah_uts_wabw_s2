@@ -1,6 +1,7 @@
 <?php
 require_once 'config/function_helper.php';
 require_once 'config/db.php';
+require 'config/QueryBuilder.php';
 require 'config/Controller.php';
 require_once 'controllers/buku.php';
 require_once 'controllers/anggota.php';
@@ -56,9 +57,11 @@ if ($action == null) {
     response_api(['success' => false, 'message' => 'action must be set']);
 }
 
-
 $class = new $module($db);
 $action = "action$action";
+
 unset($_GET['module']);
 unset($_GET['action']);
+
+// dd("$module->$action()");
 $class->$action($_POST ?? $_GET ?? []);

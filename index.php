@@ -1,5 +1,8 @@
 <?php
 require_once 'config/function_helper.php';
+require 'config/QueryBuilder.php';
+
+$query = new QueryBuilder($db);
 ?>
 <!DOCTYPE html>
 <html lang="en">

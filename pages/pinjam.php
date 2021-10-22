@@ -1,3 +1,12 @@
+<?php
+require_once 'config/function_helper.php';
+require_once 'config/db.php';
+
+$query = new QueryBuilder($db);
+$anggota = (object)($query->ExecQuery("select * from anggota", [])['data']);
+$buku = (object)($query->ExecQuery("select * from buku", [])['data']);
+?>
+
 <div class="row">
     <div class="col-md-12">
         <div class="container text-center">
@@ -6,8 +15,16 @@
         <div class="container">
             <form id="form" onsubmit="event.preventDefault()" action="POST">
                 <input type="hidden" name="id" style="margin-top:2rem" class="m-1 form-control">
-                <input type="text" name="nrp" placeholder="NRP" style="margin-top:2rem" class="m-1 form-control">
-                <input type="text" name="kode_buku" placeholder="KODE BUKU" style="margin-top:2rem" class="m-1 form-control">
+                <select name="nrp" placeholder="NRP" style="margin-top:2rem" class="m-1 form-control">
+                    <?php foreach ($anggota as $item) : ?>
+                        <option value="<?= $item->nrp ?>"><?= $item->nama ?></option>
+                    <?php endforeach ?>
+                </select>
+                <select name="kode_buku" style="margin-top:2rem" class="m-1 form-control">
+                    <?php foreach ($buku as $item) : ?>
+                        <option value="<?= $item->kode_buku ?>"><?= $item->judul ?></option>
+                    <?php endforeach ?>
+                </select>
                 <input type="date" name="tgl_pinjam" placeholder="Tanggal" style="margin-top:2rem" class="m-1 form-control">
                 <button id="insert" class="btn btn-success" style="margin-top:2rem">Simpan</button>
             </form>
@@ -24,74 +41,95 @@
         </table>
     </div>
 </div>
+
+<?php $link = "pinjam"; ?>
 <script>
     let container = $("#container-data");
     let insert = $("#insert");
     let form = $("#form");
-    // let formupdate= $("#formupdate");
 
-    $(document).ready(function() {
-        $.ajax({
-            "url": '<?= url("api/buku") ?>',
-            "method": "GET",
-            success: function(response) {
+    function rebuild() {
+        fetch('<?= url("api/$link") ?>').then(res => res.json()).then(res => {
+            if (typeof res.data != "object") alert("Data tidak ditemukan");
+            else {
                 container.html("");
-                response.data.foreach(item => {
-                    container.html(response.html);
-                })
+                if (res.data == null || res.data.length == 0) container.append(`<tr><td colspan="5" style="text-align: center">Data tidak ada</td></tr>`);
+                else {
+                    res.data.forEach(item => {
+                        container.append(`
+                            <tr>
+                                <td>${item.id}</td>
+                                <td>${item.nama}</td>
+                                <td>${item.judul}</td>
+                                <td>${item.tgl_pinjam}</td>
+                                <td>
+                                    <button class="btn btn-danger" onclick="deletedata(${item.id})">
+                                        Hapus
+                                    </button>
+                                </td>
+                            </tr>;
+                        `)
+                    });
+                }
             }
         });
+    }
 
+    $(document).ready(function() {
+        rebuild();
         insertfunction();
     });
 
+
+    function buildForm(data) {
+        let form = new FormData;
+        data.map(item => {
+
+            form.append(item.name, item.value);
+        });
+
+        return form;
+    }
+
+
     function insertfunction() {
         insert.on('click', () => {
-            let data = form.serialize();
-            $.ajax({
-                "url": "/buku/create",
-                "method": "POST",
-                "data": data,
-                success: function(response) {
-                    // response = await response.json();
-                    container.html(response.html);
-                }
-            });
-            form[0].reset();
-        });
-    }
-
-    function search(event) {
-        $.ajax({
-            "url": "server.php?action=search&search=" + event.target.value,
-            "method": "GET",
-            success: function(response) {
-                container.html(response.html);
-            }
-        });
-    }
-
-    function update(id) {
-        $.ajax({
-            "url": "server.php?action=view&id=" + id,
-            "method": "GET",
-            success: function(response) {
-
-                $("input[name=id]").val(response.data[0].id);
-                $("input[name=nrp]").val(response.data[0].nrp);
-                $("input[name=nama]").val(response.data[0].nama);
-                $("input[name=prodi]").val(response.data[0].prodi);
+            let data = buildForm(form.serializeArray());
+            if ($("input[name=id]").val() == "") {
+                fetch('<?= url("api/$link/create") ?>', {
+                    method: "POST",
+                    body: data,
+                }).then(res => res.json()).then(res => {
+                    if (res.success == false) alert(res.message);
+                    else {
+                        rebuild();
+                        form[0].reset();
+                    }
+                });
+            } else {
+                fetch('<?= url("api/$link/update") ?>', {
+                    method: "POST",
+                    body: data,
+                }).then(res => res.json()).then(res => {
+                    if (res.success == false) alert(res.message);
+                    else {
+                        rebuild();
+                        form[0].reset();
+                    }
+                });
             }
         });
     }
 
     function deletedata(id) {
-        $.ajax({
-            "url": "server.php?action=delete&id=" + id,
-            "method": "GET",
-            success: function(response) {
-                container.html(response.html)
-            }
+        let data = new FormData;
+        data.append("id", id);
+        fetch('<?= url("api/$link/delete") ?>', {
+            "body": data,
+            "method": "POST",
+        }).then(res => res.json()).then(res => {
+            alert(res.message);
+            rebuild();
         });
     }
 </script>
