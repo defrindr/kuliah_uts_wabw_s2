@@ -5,7 +5,7 @@
         </div>
         <div class="container">
             <form id="form" onsubmit="event.preventDefault()" action="POST">
-                <input type="number" name="nrp" placeholder="NRP" style="margin-top:2rem" class="m-1 form-control">
+                <input type="hidden" name="nrp">
                 <input type="text" name="nama" placeholder="Nama" style="margin-top:2rem" class="m-1 form-control">
                 <input type="date" name="tgl_lahir" placeholder="Tanggal Lahir" style="margin-top:2rem" class="m-1 form-control">
                 <input type="alamat" name="alamat" placeholder="Alamat" style="margin-top:2rem" class="m-1 form-control">
