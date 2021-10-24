@@ -9,7 +9,7 @@ class QueryBuilder
         $this->db = $db;
     }
 
-    public function ExecQuery($query, $binding = [])
+    public function ExecQuery($query, $binding = [], $with_response = true)
     {
         $model = $this->db->prepare($query);
         $model->setFetchMode(PDO::FETCH_OBJ);
@@ -27,7 +27,9 @@ class QueryBuilder
                     $response['data'][] = $row;
                 }
             }
+            if (!$with_response) return $response['data'];
         } else {
+            if (!$with_response) return null;
             $response['success'] = false;
             $response['message'] = 'Data kosong';
         }

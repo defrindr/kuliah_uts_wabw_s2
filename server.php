@@ -6,6 +6,7 @@ require 'config/Controller.php';
 require_once 'controllers/buku.php';
 require_once 'controllers/anggota.php';
 require_once 'controllers/pinjam.php';
+require_once 'controllers/chart.php';
 
 $module = null;
 if (isset($_GET['module'])) {
@@ -18,6 +19,9 @@ if (isset($_GET['module'])) {
             break;
         case "pinjam":
             $module = "Pinjam";
+            break;
+        case "chart":
+            $module = "Chart";
             break;
         default:
             $module = null;

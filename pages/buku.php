@@ -9,7 +9,8 @@
                 <input type="text" name="judul" placeholder="Judul" style="margin-top:2rem" class="m-1 form-control">
                 <input type="text" name="penerbit" placeholder="Penerbit" style="margin-top:2rem" class="m-1 form-control">
                 <input type="text" name="pengarang" placeholder="Pengarang" style="margin-top:2rem" class="m-1 form-control">
-                <button id="insert" class="btn btn-success" style="margin-top:2rem">Simpan</button>
+                <button id="insert" class="btn btn-success" style="margin-top:2rem">Simpan </button>
+                <button id="btnPrint" class="btn btn-primary" style="margin-top:2rem">Cetak </button>
             </form>
         </div>
         <table id="section-to-print" class="table table-responsive table-stripped">

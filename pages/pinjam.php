@@ -26,7 +26,8 @@ $buku = (object)($query->ExecQuery("select * from buku", [])['data']);
                     <?php endforeach ?>
                 </select>
                 <input type="date" name="tgl_pinjam" placeholder="Tanggal" style="margin-top:2rem" class="m-1 form-control">
-                <button id="insert" class="btn btn-success" style="margin-top:2rem">Simpan</button>
+                <button id="insert" class="btn btn-success" style="margin-top:2rem">Simpan </button>
+                <button id="btnPrint" class="btn btn-primary" style="margin-top:2rem">Cetak </button>
             </form>
         </div>
         <table id="section-to-print" class="table table-responsive table-stripped">
