@@ -13,3 +13,7 @@
 - Export PDF
 - CRUD with RESTFULL API
 - REALTIME CHART
+
+
+## DEMO
+https://uts-3.defrindr.my.id/
