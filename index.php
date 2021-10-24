@@ -17,6 +17,31 @@ $query = new QueryBuilder($db);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--pdf maker cdn  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js" integrity="sha512-Yf733gmgLgGUo+VfWq4r5HAEaxftvuTes86bKvwTpqOY3oH0hHKtX/9FfKYUcpaxeBJxeXvcN4EY3J6fnmc9cA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #section-to-print,
+            #section-to-print * {
+                visibility: visible;
+            }
+
+            #section-to-print .col-aksi,
+            #section-to-print .col-aksi * {
+                visibility: hidden;
+            }
+
+            #section-to-print {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -59,5 +84,10 @@ $query = new QueryBuilder($db);
         </main>
     </div>
 </body>
+<script>
+    document.querySelector("#btnPrint").addEventListener('click', function() {
+        window.print();
+    });
+</script>
 
 </html>

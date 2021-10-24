@@ -12,13 +12,13 @@
                 <button id="insert" class="btn btn-success" style="margin-top:2rem">Simpan</button>
             </form>
         </div>
-        <table class="table table-responsive table-stripped">
+        <table id="section-to-print" class="table table-responsive table-stripped">
             <thead>
                 <th>Kode Buku</th>
                 <th>Judul</th>
                 <th>Pengarang</th>
                 <th>Penerbit</th>
-                <th>Aksi</th>
+                <th class="col-aksi">Aksi</th>
             </thead>
             <tbody id="container-data"></tbody>
         </table>
@@ -44,7 +44,7 @@
                                 <td>${item.judul}</td>
                                 <td>${item.pengarang}</td>
                                 <td>${item.penerbit}</td>
-                                <td>
+                                <td class="col-aksi">
                                     <button class="btn btn-danger" onclick="deletedata(${item.kode_buku})">
                                         Hapus
                                     </button>

@@ -29,13 +29,13 @@ $buku = (object)($query->ExecQuery("select * from buku", [])['data']);
                 <button id="insert" class="btn btn-success" style="margin-top:2rem">Simpan</button>
             </form>
         </div>
-        <table class="table table-responsive table-stripped">
+        <table id="section-to-print" class="table table-responsive table-stripped">
             <thead>
                 <th>ID</th>
                 <th>Nrp</th>
                 <th>Kode Buku</th>
                 <th>Tanggal</th>
-                <th>Aksi</th>
+                <th class="col-aksi">Aksi</th>
             </thead>
             <tbody id="container-data"></tbody>
         </table>
@@ -62,7 +62,7 @@ $buku = (object)($query->ExecQuery("select * from buku", [])['data']);
                                 <td>${item.nama}</td>
                                 <td>${item.judul}</td>
                                 <td>${item.tgl_pinjam}</td>
-                                <td>
+                                <td class="col-aksi">
                                     <button class="btn btn-danger" onclick="deletedata(${item.id})">
                                         Hapus
                                     </button>

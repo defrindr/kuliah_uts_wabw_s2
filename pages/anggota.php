@@ -10,17 +10,18 @@
                 <input type="date" name="tgl_lahir" placeholder="Tanggal Lahir" style="margin-top:2rem" class="m-1 form-control">
                 <input type="alamat" name="alamat" placeholder="Alamat" style="margin-top:2rem" class="m-1 form-control">
                 <input type="no_hp" name="no_hp" placeholder="No HP" style="margin-top:2rem" class="m-1 form-control">
-                <button id="insert" class="btn btn-success" style="margin-top:2rem">Simpan</button>
+                <button id="insert" class="btn btn-success" style="margin-top:2rem">Simpan </button>
+                <button id="btnPrint" class="btn btn-primary" style="margin-top:2rem">Cetak </button>
             </form>
         </div>
-        <table class="table table-responsive table-stripped">
+        <table id="section-to-print" class="table table-responsive table-stripped">
             <thead>
                 <th>NRP</th>
                 <th>Nama</th>
                 <th>Tanggal</th>
                 <th>Alamat</th>
                 <th>No HP</th>
-                <th>Aksi</th>
+                <th class="col-aksi">Aksi</th>
             </thead>
             <tbody id="container-data"></tbody>
         </table>
@@ -49,7 +50,7 @@
                                 <td>${item.tgl_lahir}</td>
                                 <td>${item.alamat}</td>
                                 <td>${item.no_hp}</td>
-                                <td>
+                                <td class="col-aksi">
                                     <button class="btn btn-danger" onclick="deletedata(${item.nrp})">
                                         Hapus
                                     </button>

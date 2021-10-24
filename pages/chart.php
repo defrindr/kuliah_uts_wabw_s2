@@ -1,6 +1,5 @@
-<div class="row">
+<div class="row" id="section-to-print">
     <div class="col-md-4">
-
         <canvas id="myChart" width="100" height="100"></canvas>
     </div>
 </div>
